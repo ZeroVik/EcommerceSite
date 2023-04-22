@@ -1,0 +1,31 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme"/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<div class="page">
+    <main>
+            <div class="top-row px-2">
+                <HomeButton />
+                <Search />
+                <UserButton/>
+                <CartCounter/>
+                <MudToggleIconButton @bind-Toggled="@_isDarkMode" Class="ma-1" T="bool" Icon="@Icons.Material.Filled.WbSunny" Color="Color.Primary" ToggledIcon="@Icons.Material.Filled.Bedtime" ToggledColor="Color.Primary"/>
+            </div>
+        
+        <div class="nav-menu">
+            <ShopNavMenu />
+        </div>
+
+        <article class="content px-2">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code{
+    private MudTheme _theme = new();
+    private bool _isDarkMode;
+
+}

@@ -1,0 +1,68 @@
+﻿@inject IProductService ProductService
+@implements IDisposable
+
+
+
+<MudContainer>
+    <MudText Typo="Typo.h2" Class="text-center">Най - популярни днес</MudText>
+    @if (ProductService.Products == null || ProductService.Products.Count == 0)
+    {
+                <MudText Typo="Typo.body1">Няма намерени продукти.</MudText>
+    }
+    else
+    {
+            <div class="d-flex justify-center">
+                <MudCarousel Class="d-flex my-carousel" Style="height:400px; width:300px; margin: 0 auto;" 
+                          ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" 
+                          AutoCycle="@autocycle" TData="object">
+                @foreach (var product in ProductService.Products)
+                {
+                    @if (product.Featured)
+                    {
+                                    <MudCarouselItem Class="d-flex justify-center" Transition="transition" Color="@Color.Transparent">
+                                        <MudItem xs="12" sm="6" md="4" Class="d-flex align-center justify-center mud-width-full py-8">
+                                            <MudCard>
+                                                <a href="@($"product/{product.Id}")">
+                                                    <MudImage Height="280" Width="280" src="@product.ImageUrl" />
+                                                </a>
+                                                <MudCardContent>
+                                                    <MudText Typo="Typo.h6" Class="product-title">
+                                                        <a href="@($"product/{product.Id}")">@product.Title</a>
+                                                    </MudText>
+                                        @if (product.Variants != null && product.Variants.Count > 0)
+                                        {
+                                                            <MudText Typo="Typo.subtitle1" Class="mt-2 product-price">
+                                                @product.Variants[0].Price Лева
+                                                            </MudText>
+                                        }
+                                                </MudCardContent>
+                                            </MudCard>
+                                        </MudItem>
+                                    </MudCarouselItem>
+                    }
+                }
+                </MudCarousel>
+            </div>
+    }
+</MudContainer>
+
+
+
+
+@code {
+    private bool arrows = true;
+    private bool bullets = false;
+    private bool enableSwipeGesture = true;
+    private bool autocycle = false;
+    private Transition transition = Transition.Fade;
+
+    protected override void OnInitialized()
+    {
+        ProductService.ProductsChanged += StateHasChanged;
+    }
+    public void Dispose()
+    {
+        ProductService.ProductsChanged -= StateHasChanged;
+    }
+
+}

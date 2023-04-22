@@ -1,0 +1,13 @@
+﻿.home-button{
+    white-space: nowrap;
+    margin-right: 10px;
+    transform: rotate(-5deg);
+    border-color: rgb(128, 128, 128);
+    background-color: rgb(128, 128, 128);
+    color: rgb(255, 255, 255);
+    padding-left: +10px;
+}
+
+.home-button:hover {
+    background-color: rgb(34 36 67);
+}

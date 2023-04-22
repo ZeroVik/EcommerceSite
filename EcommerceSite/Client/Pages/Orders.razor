@@ -1,0 +1,38 @@
+﻿@page "/orders"
+@inject IOrderService OrderService
+
+<h3>Orders</h3>
+
+@if(orders == null)
+{
+    <span>Зареждане на поръчките</span>
+}
+else if(orders.Count <= 0)
+{
+    <span>Нямате поръчки</span>
+}
+else
+{
+    foreach(var order in orders)
+    {
+        <div class="container">
+            <div class="img-wrapper">
+                <img src="@order.ProductImageUrl" class="image"/>
+            </div>
+            <div class="details">
+                <h4>@order.Product</h4>
+                <span>@order.DateOrder</span><br />
+                <a href="orders/@order.Id">Още</a>
+            </div>
+            <div class = "order-price">@order.TotalPrice лева</div>
+        </div>
+    }
+}
+
+@code {
+    List<OrderViewReview> orders = null;
+    protected override async Task OnInitializedAsync()
+    {
+        orders = await OrderService.GetOrder();
+    }
+}

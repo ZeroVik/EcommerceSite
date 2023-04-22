@@ -1,0 +1,90 @@
+﻿@page "/cart"
+@inject ICartService CartService
+@inject IOrderService OrderService
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+
+
+@if (cartProducts == null || cartProducts.Count == 0)
+{
+    <span>@message</span>
+}
+else
+{
+        <div class="container">
+            <h3>Количка</h3>
+        @foreach (var product in cartProducts)
+        {
+                    <div class="product">
+                        <div class="image-wrapper">
+                            <img src="@product.ImageUrl" class="image" />
+                        </div>
+                        <div class="name">
+                            <h5><a href="/product/@product.ProductId">@product.ProductTitle</a></h5>
+                            <span>@product.ProductType</span><br/>
+                            <input type="number" value="@product.Quantity"
+                        @onchange="@((ChangeEventArgs e) => UpdateQuantity(e, product))"
+                        class="form-control input-quantity"
+                        min="1"/>
+                            <button class="btn-delete" @onclick="@(() => RemoveProductFromCart(product.ProductId, product.ProductTypeId))">Премахни</button>
+                        </div>
+                        <div class="cart-product-price">@(product.Price * product.Quantity) Лева</div>
+                    </div>
+        }
+            <div class="total">
+                <div class="price">Общо: @cartProducts.Sum(products => @products.Price * products.Quantity) Лева</div>
+            </div>
+        </div>
+        @if(isAuthenticated)
+        {
+            <div>
+                <h5>Адрес за доставка</h5>
+                <AddressForm />
+            </div>
+        }
+    <button @onclick="OrderPlace" class="btn alert-success float-end mt-1">Поръчване</button>
+        
+}
+
+
+@code {
+    List<CartProductResponse> cartProducts = null;
+    string message = "Зареждане на количката...";
+    bool isAuthenticated = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isAuthenticated = await AuthService.IsUserAuthenticated();
+        await LoadCart();
+    }
+
+    private async Task RemoveProductFromCart(int productId, int productTypeId)
+    {
+        await CartService.RemoveProductFromCart(productId, productTypeId);
+        await LoadCart();
+    }
+    private async Task LoadCart()
+    {
+        await CartService.GetItemCartCount();
+        cartProducts = await CartService.GetCartProduct();
+        if (cartProducts == null || cartProducts.Count == 0)
+        {
+            message = "Количката е празна";
+        }
+    }
+    private async Task UpdateQuantity(ChangeEventArgs e, CartProductResponse product)
+    {
+        product.Quantity = int.Parse(e.Value.ToString());
+        if(product.Quantity < 1)
+        {
+            product.Quantity = 1;
+        }
+        await CartService.UpdateQuantity(product);
+    }
+    private async Task OrderPlace()
+    {
+        string url = await OrderService.OrderPlace();
+        NavigationManager.NavigateTo(url);
+    }
+
+}

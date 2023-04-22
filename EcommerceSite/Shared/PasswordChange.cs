@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EcommerceSite.Shared
+{
+    public class PasswordChange
+    {
+        [Required, StringLength(150, MinimumLength = 5)]
+        public string Password { get; set; } = string.Empty;
+        [Compare("Password", ErrorMessage = "Паролите не съвпадат.")]
+        public string ConfirmPassword { get; set; } = string.Empty;
+
+    }
+}

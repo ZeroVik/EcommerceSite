@@ -1,0 +1,109 @@
+﻿ Reset and basic styles 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+    a:hover {
+        color: #0056b3;
+    }
+
+ Product list 
+.list-unstyled {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.media {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+    .media:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+.media-img-wrapper {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.media-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.media-body {
+    flex-grow: 1;
+    padding-left: 15px;
+}
+
+    .media-body h4 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .media-body p {
+        font-size: 14px;
+        color: #666;
+    }
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+ Pagination 
+.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 10px 5px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+.btn-outline-info {
+    background-color: #fff;
+    color: #007bff;
+}
+
+    .btn-outline-info:hover {
+        background-color: #e6f3ff;
+        color: #0056b3;
+    }
+
+.page-selection {
+    text-align: center;
+}
