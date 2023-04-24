@@ -52,8 +52,8 @@ namespace EcommerceSite.Server.Services.PaymentService
                 },
                 LineItems = lineItems,
                 Mode = "payment",
-                SuccessUrl = "https://localhost:7252/order-success",
-                CancelUrl = "https://localhost:7252/cart"
+                SuccessUrl = "https://axl.azurewebsites.net/order-success",
+                CancelUrl = "https://axl.azurewebsites.net/cart"
             };
             var service = new SessionService();
             Session session = service.Create(options);
