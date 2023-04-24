@@ -76,12 +76,16 @@ a {
     color: #333;
 }
 
- Pagination 
+Pagination
+.btn-info{
+    border-color: black;
+}
+
 .btn {
     display: inline-block;
     padding: 5px 10px;
     margin: 10px 5px;
-    border: 1px solid #007bff;
+    border: 1px solid #594ae2ff;
     border-radius: 5px;
     background-color: #007bff;
     color: #fff;
@@ -95,15 +99,18 @@ a {
     }
 
 .btn-outline-info {
-    background-color: #fff;
-    color: #007bff;
+    background-color: #594ae2ff;
+    color: white;
+    border-color: black;
 }
 
     .btn-outline-info:hover {
-        background-color: #e6f3ff;
+        background-color: white;
         color: #0056b3;
     }
 
 .page-selection {
     text-align: center;
+    background-color: mediumslateblue;
+    color: white;
 }

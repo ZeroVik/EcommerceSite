@@ -3,16 +3,16 @@
 
 
 
-<MudContainer>
-    <MudText Typo="Typo.h2" Class="text-center">Най - популярни днес</MudText>
+<MudContainer Class="my-container" Style="background-color: #F2F2F2;">
+    <MudText Typo="Typo.h2" Class="text-center my-4">Най - популярни днес</MudText>
     @if (ProductService.Products == null || ProductService.Products.Count == 0)
     {
-                <MudText Typo="Typo.body1">Няма намерени продукти.</MudText>
+                <MudText Typo="Typo.body1" Class="my-4 mx-2">Няма намерени продукти.</MudText>
     }
     else
     {
             <div class="d-flex justify-center">
-                <MudCarousel Class="d-flex my-carousel" Style="height:400px; width:300px; margin: 0 auto;" 
+                <MudCarousel Class="d-flex my-carousel" Style="height:400px; width:300px; margin: 0 auto; margin-top: 2rem; padding: 1rem;" 
                           ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" 
                           AutoCycle="@autocycle" TData="object">
                 @foreach (var product in ProductService.Products)

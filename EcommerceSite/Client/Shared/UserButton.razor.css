@@ -2,6 +2,11 @@
     display: block;
 }
 
+btn-info {
+    color: white;
+}
+
+
 .user-button {
     margin-left: .5em;
 }

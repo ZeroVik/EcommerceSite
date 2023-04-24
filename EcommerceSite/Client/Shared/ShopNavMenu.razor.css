@@ -4,7 +4,7 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(190, 86, 131, 1);
 }
 
 .navbar-brand {
@@ -54,6 +54,7 @@
     }
 
     .flex-nav {
+        background-color:#594ae2ff;
         flex-direction: row;
         display: flex;
         
