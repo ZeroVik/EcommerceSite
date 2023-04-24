@@ -9,7 +9,7 @@ namespace EcommerceSite.Server.Services.PaymentService
         private readonly IAuthService _authService;
         private readonly IOrderService _orderService;
 
-        const string secret = "whsec_433bfd6f4170f0cc1096a17aec9130a1c851975668ecb0874cb4d2c605ca15f9";
+        const string secret = "whsec_fK78B1RtITOc36IjpfRhHVQLZs2tVNTc";
 
         public PaymentService(ICartService cartService, IAuthService authService, IOrderService orderService) 
         {
