@@ -1,5 +1,6 @@
 ﻿@page "/register"
 @inject IAuthService AuthService
+@inject NavigationManager NavigationManager
 
 <PageTitle>Регистрация</PageTitle>
 
@@ -40,10 +41,13 @@
         if(result.Success)
         {
             messageCssClass = "text-success";
+            await Task.Delay(1500);
+            NavigationManager.NavigateTo("/login");
         }
         else
         {
             messageCssClass = "text-danger";
         }
+        StateHasChanged();
     }
 }
