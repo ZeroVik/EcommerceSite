@@ -11,8 +11,9 @@
                     <MudButton OnClick="@(() => NavigationManager.NavigateTo("profile"))">Профил</MudButton>
                     <MudButton OnClick="@(() => NavigationManager.NavigateTo("orders"))">Поръчки</MudButton>
                     <MudButton OnClick="@(() => NavigationManager.NavigateTo("contacts"))">Свържете се с нас</MudButton>
+                    <hr />
                     <AdminMenu />
-                    <MudButton OnClick="Logout">Отписване</MudButton>
+                    <MudButton OnClick="Logout" Style="color: red">Отписване</MudButton>
                 </Authorized>
                 <NotAuthorized>
                     <MudButton OnClick="@(() => NavigationManager.NavigateTo("login?returnUrl=" + NavigationManager.ToBaseRelativePath(NavigationManager.Uri)))">Вписване</MudButton>
