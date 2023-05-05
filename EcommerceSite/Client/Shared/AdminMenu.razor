@@ -1,11 +1,12 @@
 ﻿@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager NavigationManager
 @using System.Security.Claims
 
 @if(authorized)
 {
-    <a class="dropdown-item" href="admin/categories">Категории</a>
-    <a class="dropdown-item" href="admin/product-types">Тип на продукта</a>
-    <a class="dropdown-item" href="admin/products">Продукти</a>
+    <MudButton OnClick="@(() => NavigationManager.NavigateTo("admin/categories"))">Категории</MudButton>
+    <MudButton OnClick="@(() => NavigationManager.NavigateTo("admin/product-types"))">Тип на продукта</MudButton>
+    <MudButton OnClick="@(() => NavigationManager.NavigateTo("admin/products"))">Продукти</MudButton>
     <hr />
 }
 

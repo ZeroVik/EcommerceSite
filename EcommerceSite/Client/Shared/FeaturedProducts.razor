@@ -5,9 +5,14 @@
 
 <MudContainer Class="my-container" Style="background-color: #bdbbbb;">
     <MudText Typo="Typo.h2" Class="text-center my-4">Най - популярни днес</MudText>
+    
     @if (ProductService.Products == null || ProductService.Products.Count == 0)
     {
-                <MudText Typo="Typo.body1" Class="my-4 mx-2">Няма намерени продукти.</MudText>
+        <div class="d-flex justify-content">
+            <MudText Typo="Typo.body1" Class="my-4 mx-2">Няма намерени продукти.</MudText>
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true"/>
+        </div>
+                
     }
     else
     {
@@ -53,9 +58,9 @@
     private bool arrows = true;
     private bool bullets = false;
     private bool enableSwipeGesture = true;
-    private bool autocycle = false;
+    private bool autocycle = true;
     private Transition transition = Transition.Fade;
-
+    
     protected override void OnInitialized()
     {
         ProductService.ProductsChanged += StateHasChanged;

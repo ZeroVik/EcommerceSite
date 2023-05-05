@@ -1,0 +1,56 @@
+﻿@inject ILocalStorageService LocalStorage
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject ICartService CartService
+
+<MudDialog>
+    <DialogContent>
+        <div class="d-flex flex-column py-1">
+            <AuthorizeView>
+                <Authorized>
+                    <MudButton OnClick="@(() => NavigationManager.NavigateTo("profile"))">Профил</MudButton>
+                    <MudButton OnClick="@(() => NavigationManager.NavigateTo("orders"))">Поръчки</MudButton>
+                    <MudButton OnClick="@(() => NavigationManager.NavigateTo("contacts"))">Свържете се с нас</MudButton>
+                    <AdminMenu />
+                    <MudButton OnClick="Logout">Отписване</MudButton>
+                </Authorized>
+                <NotAuthorized>
+                    <MudButton OnClick="@(() => NavigationManager.NavigateTo("login?returnUrl=" + NavigationManager.ToBaseRelativePath(NavigationManager.Uri)))">Вписване</MudButton>
+                    <MudButton OnClick="@(() => NavigationManager.NavigateTo("register"))">Регистриране</MudButton>
+                </NotAuthorized>
+            </AuthorizeView> 
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Close">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    void Close() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+    private bool showUserMenu = false;
+    private string UserMenuCssClass => showUserMenu ? "show-menu" : null;
+    private void ToggleUserMenu()
+    {
+        showUserMenu = !showUserMenu;
+    }
+
+
+    private async Task HideUserMenu()
+    {
+        await Task.Delay(200);
+        showUserMenu = false;
+    }
+
+    public async Task Logout()
+    {
+        await LocalStorage.RemoveItemAsync("authToken");
+        await CartService.GetItemCartCount();
+        await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        NavigationManager.NavigateTo("");
+    }
+}
