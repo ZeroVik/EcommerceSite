@@ -1,14 +1,23 @@
 ﻿@inject IJSRuntime JSRuntime
 @inject IDialogService DialogService
 
+
+
 <MudButton OnClick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary" Style="margin-left: .5em">
     Акаунт
 </MudButton>
+
+<style>
+    .my-custom-class {
+        backdrop-filter: blur(10px);
+    }
+</style>
 
 
 @code {
     private async void OpenDialog()
     {
-        var dialog = DialogService.Show<Dialogue>("Акаунт");
+        var options = new DialogOptions { ClassBackground = "my-custom-class" };
+        var dialog = DialogService.Show<Dialogue>("Акаунт", options);
     }
 }

@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@inject NavigationManager NavigationManager
+@inherits LayoutComponentBase
+@using System.Timers
 
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme"/>
 <MudDialogProvider/>
@@ -20,6 +22,18 @@
 
         <article class="content px-2">
             @Body
+            @if (ShowIntroCard)
+    {
+        <MudCard Outlined="true" Class="intro-card">
+            <MudCardContent>
+                <MudText>Информация</MudText>
+                <MudText Typo="Typo.body2">Ако искате да добавите обява свържете се с администратора</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton OnClick="@(() => NavigationManager.NavigateTo("/contacts"))" Variant="Variant.Text" Color="Color.Primary">Научи повече</MudButton>
+            </MudCardActions>
+        </MudCard>
+    }
         </article>
     </main>
 </div>
@@ -27,5 +41,23 @@
 @code{
     private MudTheme _theme = new();
     private bool _isDarkMode;
+    private bool ShowIntroCard { get; set; } = true;
 
+    private Timer _introCardTimer;
+
+    private void HideIntroCard(Object source, ElapsedEventArgs e)
+    {
+        ShowIntroCard = false;
+        _introCardTimer.Stop();
+        _introCardTimer.Dispose();
+        InvokeAsync(StateHasChanged);
+    }
+
+    protected override void OnInitialized()
+    {
+        _introCardTimer = new Timer(5000); // 3000 milliseconds = 3 seconds
+        _introCardTimer.Elapsed += HideIntroCard;
+        _introCardTimer.AutoReset = false;
+        _introCardTimer.Start();
+    }
 }

@@ -7,3 +7,10 @@
     box-shadow: none;
     transform: translateY(0);
 }
+
+.intro-card {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 10;
+}
